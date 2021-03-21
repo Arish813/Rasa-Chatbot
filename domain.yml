@@ -1,0 +1,133 @@
+version: '2.0'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- tell_budget
+- restaurant_search
+- affirm
+- send_email
+- greet
+- deny
+- thank_you
+- goodbye
+- stop
+entities:
+- budget
+- cuisine
+- email
+- location
+slots:
+  budget:
+    type: categorical
+    influence_conversation: true
+    values:
+    - low
+    - medium
+    - high
+  cuisine:
+    type: text
+    influence_conversation: true
+  email:
+    type: text
+    influence_conversation: true
+  location:
+    type: text
+    influence_conversation: true
+  cuisine_flag:
+    type: bool
+    initial_value: false
+    influence_conversation: true
+  location_flag:
+    type: bool
+    initial_value: false
+    influence_conversation: true
+  email_sent_flag:
+    type: bool
+    initial_value: false
+    influence_conversation: true
+  restaurant_found_flag:
+    type: bool
+    initial_value: false
+    influence_conversation: true
+responses:
+  utter_ask_budget:
+  - text: What would be your preferred budget?
+    buttons:
+    - title: Less than Rs. 300
+      payload: Less than Rs. 300
+    - title: Between Rs. 300 to 700
+      payload: Between Rs. 300 to 700
+    - title: More than Rs. 700
+      payload: More than Rs. 700
+  utter_ask_cuisine:
+  - buttons:
+    - payload: Chinese
+      title: Chinese
+    - payload: Mexican
+      title: Mexican
+    - payload: Italian
+      title: Italian
+    - payload: American
+      title: American
+    - payload: South Indian
+      title: South Indian
+    - payload: North Indian
+      title: North Indian
+    text: what kind of cuisine would you like?
+  utter_ask_cuisine_again:
+  - buttons:
+    - payload: Chinese
+      title: Chinese
+    - payload: Mexican
+      title: Mexican
+    - payload: Italian
+      title: Italian
+    - payload: American
+      title: American
+    - payload: South Indian
+      title: South Indian
+    - payload: North Indian
+      title: North Indian
+    text: Looks like that dish is not on the menu, can you try one of these ?
+  utter_ask_email:
+  - text: what is your email id ?
+  - text: Can I have your email id please
+  utter_ask_location:
+  - text: In what location?
+  - text: Can you please tell me the location
+  utter_ask_location_again:
+  - text: Seems like we dont operate in that location, please enter some other location.
+  - text: We don't operate at that location. Please enter a different location.
+  utter_goodbye:
+  - text: Hope I was of help. See you soon.
+  - text: Okay, Happy to serve you.
+  utter_email_sent:
+  - text: Your email has been sent
+  - text: We have emailed you the restaurants
+  utter_greet:
+  - text: hey there! How may i help you
+  - text: Hi, How can I help you!
+  - text: Hey, How is it going. How May I help you Today
+  - text: Hey, here to help you find some amazing restaurants
+  utter_welcome:
+  - text: Glad I was of help
+  - text: Always at your service
+  utter_default:
+  - text: i cannot understand
+actions:
+- action_check_cuisine
+- action_check_location
+- action_search_restaurants
+- action_send_email
+- utter_ask_budget
+- utter_ask_cuisine
+- utter_ask_cuisine_again
+- utter_ask_email
+- utter_ask_location
+- utter_ask_location_again
+- utter_default
+- utter_email_sent
+- utter_goodbye
+- utter_greet
+- utter_welcome
